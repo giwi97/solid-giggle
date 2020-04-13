@@ -1,0 +1,149 @@
+package com.CodeComplex.Controller;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+
+@WebServlet("/FileUploadServlet")
+@MultipartConfig(fileSizeThreshold = 1024*1024*10, //10MB
+				maxFileSize=1024*1024*50, // 50 MB
+				maxRequestSize=1024*1024*100)//100MB
+
+public class FileUploadServlet extends HttpServlet {
+	private static final long serialVersionUID = 205242440643911308L;
+	
+	/** * Directory where uploaded files will be saved, its relative to * the web application directory. */
+	private static final String UPLOAD_DIR = "uploads";
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public FileUploadServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// gets absolute path of the web application
+		String applicationPath = request.getServletContext().getRealPath("");
+		// constructs path of the directory to save uploaded file
+		String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
+		
+		// creates the save directory if it does not exists
+		File fileSaveDir = new File(uploadFilePath);
+		if (!fileSaveDir.exists()) {
+		fileSaveDir.mkdirs();
+		}
+		
+		System.out.println("Upload File Directory="+fileSaveDir.getAbsolutePath());
+		
+		String fileName = null;
+		//Get all the parts from request and write it to the file on server
+		for (Part part : request.getParts()) {
+		fileName = getFileName(part);
+		part.write(uploadFilePath + File.separator + fileName);
+		}
+		
+		request.setAttribute("message", fileName + " File uploaded successfully!");
+		getServletContext().getRequestDispatcher("/response.jsp").forward(
+		request, response);
+		
+		readMultipleFiles();
+		
+	}
+	
+	/** * Utility method to get file name from HTTP header content-disposition */
+	private String getFileName(Part part) {
+	String contentDisp = part.getHeader("content-disposition");
+	System.out.println("content-disposition header= "+contentDisp);
+	String[] tokens = contentDisp.split(";");
+	for (String token : tokens) {
+	if (token.trim().startsWith("filename")) {
+	return token.substring(token.indexOf("=") + 2, token.length()-1);
+	}
+	}
+	return "";
+	}
+	
+	public void readMultipleFiles() {
+		
+		 File file = new File("F:\\ITPM Project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Code_Complexity_measuring_tool\\uploads\\");
+	     File[] files = file.listFiles();
+	     BufferedReader reader;
+	     String statementLine;
+	     String[] keyWords = { "abstract", "assert", "break", "catch", "class", "const", "continue", "default", "do", "else", "enum", "extends", "final", "finally", "goto", "implements", "import", "instanceof", "interface", "native", "new", "package", "private", "protected", "public", "return", "static", "strictfp", "super", "synchronized", "this", "throw", "throws", "transient", "try", "void", "volatile" };
+	     int Cs = 0, Wkw = 1, Nkw = 0, Wid = 1, Nid = 0, Wop = 1, Nop = 0, Wnv = 1, Nnv = 0, Wsl = 1, Nsl = 0;
+  
+	     
+	        for(File f: files){
+	        	
+	            //System.out.println(f.getName());
+	            
+	            try {
+	            	
+	            	reader = new BufferedReader(new FileReader("F:\\ITPM Project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Code_Complexity_measuring_tool\\uploads\\"+f.getName()));
+	            	
+	            	String line = reader.readLine();
+	            	
+	            	while (line != null) {
+	            		
+	            		System.out.print(line);
+	            		
+	            		statementLine = line;
+	            		String[] arrOfStr = statementLine.split(" ");
+	            		
+	            		//check each word one by one
+	            		for(String check : arrOfStr) {
+	            			
+	            			
+	            			//Checking for keywords
+	            			for(String element : keyWords) {
+	            				System.out.print(check);
+	            				if(element.equals(check) || element.equals(" "+check)) {
+	            						    	            			
+	            					Nkw++;
+	            					
+	            				}
+	            				
+	            			}
+	            			
+	            		}
+	            		
+	            		System.out.print("\t");
+	            		System.out.print(Nkw);
+	            		line = reader.readLine();//reads next line
+	            		System.out.println();
+	            		Nkw = 0;
+	            	}
+	            	reader.close();
+	            }catch(IOException e) {
+	            	
+	            	e.printStackTrace();
+	            }
+	            
+	        }
+	}
+
+}
