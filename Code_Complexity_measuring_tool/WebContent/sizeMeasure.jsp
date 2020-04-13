@@ -159,7 +159,7 @@
         	<div class = "selection" style ="margin-left:5%;margin-bottom:2%;">
         	<label for="factors">Factor:</label>
 
-				<select id="factor">
+				<select id="factor" name = "factor">
   					<option value="Size">Size</option>
  					<option value="Variable">Variable</option>
   					<option value="Methods">Methods</option>
