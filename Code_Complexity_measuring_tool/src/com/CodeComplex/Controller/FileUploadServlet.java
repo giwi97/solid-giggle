@@ -81,6 +81,10 @@ public class FileUploadServlet extends HttpServlet {
 			
 			calcComplexityVariables(request, response);
 			
+		}else if(request.getParameter("factor").equals("Methods")) {
+			
+			calcComplexityMethods(request, response);
+			
 		}
 	}
 	
@@ -340,6 +344,39 @@ public class FileUploadServlet extends HttpServlet {
 
 	
         }
+	
+	public void calcComplexityMethods(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		File file = new File("F:\\ITPM Project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Code_Complexity_measuring_tool\\uploads\\");
+	    File[] files = file.listFiles();
+	    BufferedReader reader;
+	    String statementLine;
+	    int lineNo = 1;
+	    
+	    
+	    for(File f: files){
+    		
+    		try {
+    			
+    			reader = new BufferedReader(new FileReader("F:\\ITPM Project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Code_Complexity_measuring_tool\\uploads\\"+f.getName()));
+            	String line = reader.readLine();
+    			
+            	while (line != null) {
+            		System.out.print(lineNo);
+            		request.setAttribute("lineNo", lineNo);
+            		System.out.print("\t");
+            		System.out.print(line);
+            		request.setAttribute("lineS", line);
+            		
+            		
+            	}
+            	reader.close();
+    		}catch(IOException e) {
+    			e.printStackTrace();
+    		}
+	    }
+	}
 
 
 }
