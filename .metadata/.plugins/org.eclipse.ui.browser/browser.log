@@ -1,4 +1,0 @@
-
-Apr 07, 2020 24:43:33.46 NEW SESSION
-Apr 07, 2020 24:43:33.46 [11668:12860:0407/004333.461:ERROR:network_change_notifier_win.cc(141)] WSALookupServiceBegin failed with: 0
-Apr 07, 2020 02:43:15.96 [11668:17284:0407/024315.961:ERROR:socket_stream.cc(218)] Closing stream with result -2

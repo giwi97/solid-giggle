@@ -81,8 +81,8 @@
 			<hr class="sidebar-divider">
 
 			<!-- Nav Item - Size -->
-			<li class="nav-item active"><a class="nav-link"
-				href="sizeMeasure.jsp"> <i class="fas fa-fw fa-laptop-code"></i> <span>Size,
+			<li class="nav-item"><a class="nav-link"
+				href="index.html"> <i class="fas fa-fw fa-laptop-code"></i> <span>Size,
 						Variables, Methods</span></a></li>
 
 			<!-- Nav Item - Inheritance -->
@@ -101,7 +101,7 @@
 			</a></li>
 
 			<!-- Nav Item - All factors -->
-			<li class="nav-item"><a class="nav-link" href="tables.html">
+			<li class="nav-item active"><a class="nav-link" href="tables.html">
 					<i class="fab fa-fw fa-google-wallet"></i> <span>All Factors</span>
 			</a></li>
 
@@ -146,7 +146,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Complexity due to Size</h1>
+						<h1 class="h3 mb-0 text-gray-800">All Factors:</h1>
 					</div>
 
 					<!-- Content Row -->
@@ -156,7 +156,21 @@
 					<div class="box"
 						style="display: block; margin-left: auto; margin-right: auto; width: 100%; height: 100%;">
 
-					${table}
+						<form action="all.jsp">
+							<div class="upload-box"
+								style="display: block; margin-left: auto; margin-right: auto; width: 90%; height: 300px; border: 3px solid #007284; border-radius: 25px;">
+
+								<input type="file" id="files" name="filename"
+									multiple="multiple" accept=".zip, .java, .cpp"
+									style="display: block; margin-left: auto; margin-right: auto; align-content: center;" />
+							</div>
+							<p style="text-align: right; margin-top: 2%; margin-right: 5%;">
+								<input type="submit" value="upload"
+									class="btn btn-lg btn-primary" />
+							</p>
+
+
+						</form>
 
 
 					</div>

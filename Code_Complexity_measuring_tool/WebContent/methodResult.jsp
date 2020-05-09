@@ -101,7 +101,7 @@
 			</a></li>
 
 			<!-- Nav Item - All factors -->
-			<li class="nav-item"><a class="nav-link" href="tables.html">
+			<li class="nav-item"><a class="nav-link" href="allfactors.jsp">
 					<i class="fab fa-fw fa-google-wallet"></i> <span>All Factors</span>
 			</a></li>
 
@@ -146,7 +146,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Complexity due to Size</h1>
+						<h1 class="h3 mb-0 text-gray-800">Complexity due to Methods</h1>
 					</div>
 
 					<!-- Content Row -->

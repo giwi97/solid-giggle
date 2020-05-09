@@ -1,3 +1,0 @@
-INDEX VERSION 1.131
-F:\ITPM Project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1562804327.index
-\Code_Complexity_measuring_tool\src
