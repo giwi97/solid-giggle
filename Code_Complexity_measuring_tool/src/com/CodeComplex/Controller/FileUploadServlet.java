@@ -55,6 +55,8 @@ public class FileUploadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		if(request.getParameter("upload") != null) {
 
 		// gets absolute path of the web application
 		String applicationPath = request.getServletContext().getRealPath("");
@@ -86,7 +88,7 @@ public class FileUploadServlet extends HttpServlet {
 		// request, response);
 		if (request.getParameter("factor").equals("Size")) {
 
-			calcComplexitySize(request, response);
+			calcComplexitySize(request, response, 1, 1, 1, 1, 1);
 
 		} else if (request.getParameter("factor").equals("Variable")) {
 
@@ -96,6 +98,17 @@ public class FileUploadServlet extends HttpServlet {
 
 			calcComplexityMethods(request, response);
 
+		}
+		}else if(request.getParameter("sizeRecal") != null) {
+			
+			int keyw = Integer.parseInt(request.getParameter("kw"));
+			int ide = Integer.parseInt(request.getParameter("id"));
+			int ope = Integer.parseInt(request.getParameter("op"));
+			int num = Integer.parseInt(request.getParameter("nv"));
+			int str = Integer.parseInt(request.getParameter("strl"));
+			
+			calcComplexitySize(request, response, keyw, ide, ope, num, str);
+			
 		}
 	}
 
@@ -113,7 +126,7 @@ public class FileUploadServlet extends HttpServlet {
 		return null;
 	}
 
-	public void calcComplexitySize(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void calcComplexitySize(HttpServletRequest request, HttpServletResponse response, int kww, int idw, int opw, int nvw, int slw) throws IOException {
 
 		File file = new File(
 				"F:\\ITPM Project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Code_Complexity_measuring_tool\\uploads\\");
@@ -130,7 +143,7 @@ public class FileUploadServlet extends HttpServlet {
 		String[] operators = { "+", "-", "*", "/", "%", "++", "--", "==", "!=", ">=", "<", ">", "<=", "&&", "||", "!",
 				"|", "^", "~", "<<", ">>", ">>>", "<<<", "->", "::", "+=", "-=", "*=", "/=", "=", ">>>=", "|=", "&=",
 				"%=", "<<=", ">>=", "^=" };
-		int Cs = 0, Wkw = 1, Nkw = 0, Wid = 1, Nid = 0, Wop = 1, Nop = 0, Wnv = 1, Nnv = 0, Wsl = 1, Nsl = 0;
+		int Cs = 0, Wkw = kww, Nkw = 0, Wid = idw, Nid = 0, Wop = opw, Nop = 0, Wnv = nvw, Nnv = 0, Wsl = slw, Nsl = 0;
 		
 
 		StringBuilder sb = new StringBuilder();
