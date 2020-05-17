@@ -149,7 +149,7 @@
 						<h1 class="h3 mb-0 text-gray-800">Complexity due to Size</h1>
 					</div>
 
-					<!-- Content Row -->
+					<!-- Hideable edit form -->
 					<div class="row" style = "margin: auto;">
 
 						<button type="button" id="formButton" style="display: block; width:100%;">Edit Weights</button>
@@ -171,7 +171,7 @@
 							<br>
 							<br>
 							<br>
-							<input type="submit" id="submit" name = "sizeRecal" value="Recalculate">
+							<input type="submit" id="submit" name = "sizeRecal" value="Recalculate" class="btn btn-lg btn-primary">
 						</form>
 
 					</div>
