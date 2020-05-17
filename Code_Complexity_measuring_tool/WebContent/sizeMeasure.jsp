@@ -179,7 +179,7 @@
 							</div>
 							<p style="text-align: right; margin-top: 2%; margin-right: 5%;">
 								<input type="submit" value="upload"
-									class="btn btn-lg btn-primary" />
+									class="btn btn-lg btn-primary" name = "upload" />
 							</p>
 
 
