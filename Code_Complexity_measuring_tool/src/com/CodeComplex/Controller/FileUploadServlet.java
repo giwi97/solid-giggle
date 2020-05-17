@@ -92,7 +92,7 @@ public class FileUploadServlet extends HttpServlet {
 
 		} else if (request.getParameter("factor").equals("Variable")) {
 
-			calcComplexityVariables(request, response);
+			calcComplexityVariables(request, response, 2, 1, 1, 2);
 
 		} else if (request.getParameter("factor").equals("Methods")) {
 
@@ -108,6 +108,15 @@ public class FileUploadServlet extends HttpServlet {
 			int str = Integer.parseInt(request.getParameter("strl"));
 			
 			calcComplexitySize(request, response, keyw, ide, ope, num, str);
+			
+		}else if(request.getParameter("varRecal") != null) {
+			
+			int glo = Integer.parseInt(request.getParameter("gv"));
+			int loc = Integer.parseInt(request.getParameter("lv"));
+			int pd = Integer.parseInt(request.getParameter("pdtv"));
+			int cd = Integer.parseInt(request.getParameter("cdtv"));
+			
+			calcComplexityVariables(request, response, glo, loc, pd, cd);
 			
 		}
 	}
@@ -329,7 +338,7 @@ public class FileUploadServlet extends HttpServlet {
 
 	}
 
-	public void calcComplexityVariables(HttpServletRequest request, HttpServletResponse response) {
+	public void calcComplexityVariables(HttpServletRequest request, HttpServletResponse response, int gv, int lv, int pdt, int cdt) {
 
 		File file = new File(
 				"F:\\ITPM Project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Code_Complexity_measuring_tool\\uploads\\");
@@ -338,7 +347,7 @@ public class FileUploadServlet extends HttpServlet {
 		String statementLine;
 		int lineNo = 1;
 		int counter = 0;
-		int Cv = 0, Wvs = 0, Wpdtv = 1, Npdtv = 0, Wcdtv = 2, Ncdtv = 0, globVar = 0, locVar = 0, Wgv = 2, Wlv = 1;
+		int Cv = 0, Wvs = 0, Wpdtv = pdt, Npdtv = 0, Wcdtv = cdt, Ncdtv = 0, globVar = 0, locVar = 0, Wgv = 2, Wlv = 1;
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("<html>");
@@ -422,7 +431,7 @@ public class FileUploadServlet extends HttpServlet {
 								if (line.contains("int") || line.contains("String") || line.contains("double")
 										|| line.contains("float")) {
 
-									Wvs = 1;
+									Wvs = lv;
 									Npdtv++;
 									Cv = Wvs * (Wpdtv * Npdtv) + Wvs * (Wcdtv * Ncdtv);
 									/*
@@ -440,7 +449,7 @@ public class FileUploadServlet extends HttpServlet {
 								|| (line.contains("double") && line.contains("="))
 								|| (line.contains("float") && line.contains("="))) {
 
-							Wvs = 2;
+							Wvs = gv;
 							Npdtv++;
 
 						}
