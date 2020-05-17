@@ -82,8 +82,8 @@
 
 			<!-- Nav Item - Size -->
 			<li class="nav-item active"><a class="nav-link"
-				href="sizeMeasure.jsp"> <i class="fas fa-fw fa-laptop-code"></i> <span>Size,
-						Variables, Methods</span></a></li>
+				href="sizeMeasure.jsp"> <i class="fas fa-fw fa-laptop-code"></i>
+					<span>Size, Variables, Methods</span></a></li>
 
 			<!-- Nav Item - Inheritance -->
 			<li class="nav-item"><a class="nav-link" href="tables.html">
@@ -150,16 +150,37 @@
 					</div>
 
 					<!-- Content Row -->
-					<div class="row"></div>
+					<div class="row" style = "margin: auto;">
+
+						<button type="button" id="formButton" style="display: block; width:100%;">Edit Weights</button>
+							
+						<form action="FileUploadServlet" method="post" id="form1" style="padding: 15px; border: 1px solid #666; display: none; margin-right: 40%; margin-left: 40%; margin-top: 1%;">
+							<b>Keyword:</b> <input type="text" name="kw" value="1">
+							<br>
+							<br> 
+							<b>Identifier: </b><input type="text" name="id" value="1">
+							<br>
+							<br>
+							<b>Operator: </b><input type="text" name="op" value="1">
+							<br>
+							<br>
+							<b>Numerical value: </b><input type="text" name="nv" value="1">
+							<br>
+							<br>
+							<b>String literal: </b><input type="text" name="strl" value="1">
+							<br>
+							<br>
+							<br>
+							<input type="submit" id="submit" name = "sizeRecal" value="Recalculate">
+						</form>
+
+					</div>
 					<!-- /.container-fluid -->
 
 					<div class="box"
 						style="display: block; margin-left: auto; margin-right: auto; width: 100%; height: 100%;">
 
-					${table}
-
-
-					</div>
+						${table}</div>
 					<!-- End of Main Content -->
 
 
@@ -225,6 +246,13 @@
 		jQuery(function($) {
 			$("#files").shieldUpload();
 		});
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		  $("#formButton").click(function() {
+		    $("#form1").toggle();
+		  });
+		})
 	</script>
 </body>
 
