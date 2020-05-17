@@ -96,7 +96,7 @@ public class FileUploadServlet extends HttpServlet {
 
 		} else if (request.getParameter("factor").equals("Methods")) {
 
-			calcComplexityMethods(request, response);
+			calcComplexityMethods(request, response, 1, 2, 0, 1, 2);
 
 		}
 		}else if(request.getParameter("sizeRecal") != null) {
@@ -117,6 +117,16 @@ public class FileUploadServlet extends HttpServlet {
 			int cd = Integer.parseInt(request.getParameter("cdtv"));
 			
 			calcComplexityVariables(request, response, glo, loc, pd, cd);
+			
+		}else if(request.getParameter("methRecal") != null) {
+			
+			int pri = Integer.parseInt(request.getParameter("prt"));
+			int com = Integer.parseInt(request.getParameter("crt"));
+			int voi = Integer.parseInt(request.getParameter("vrt"));
+			int pdt = Integer.parseInt(request.getParameter("pdtp"));
+			int cdt = Integer.parseInt(request.getParameter("cdtp"));
+			
+			calcComplexityMethods(request, response, pri, com, voi, pdt, cdt);
 			
 		}
 	}
@@ -550,7 +560,7 @@ public class FileUploadServlet extends HttpServlet {
 
 	}
 
-	public void calcComplexityMethods(HttpServletRequest request, HttpServletResponse response) {
+	public void calcComplexityMethods(HttpServletRequest request, HttpServletResponse response, int prt, int crt, int vrt, int pdtp, int cdtp) {
 
 		File file = new File(
 				"F:\\ITPM Project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Code_Complexity_measuring_tool\\uploads\\");
@@ -558,7 +568,7 @@ public class FileUploadServlet extends HttpServlet {
 		BufferedReader reader;
 		String statementLine;
 		int lineNo = 1;
-		int Cm = 0, Wmrt = 0, Wpdtp = 0, Npdtp = 0, Wcdtp = 0, Ncdtp = 0;
+		int Cm = 0, Wmrt = 0, Wpdtp = pdtp, Npdtp = 0, Wcdtp = cdtp, Ncdtp = 0;
 		String premRet = "(public|private|protected)( byte| short | int| long| float | double | boolean | char | String)(.*?)(\\))";
 		String compRet = "(public|private|protected)( int| long | float | double | boolean | String)(.*?)(\\))";
 		String voidRet = "(public|private|protected|public static|private static |protected static)( void)(.*?)(\\))";
@@ -626,16 +636,16 @@ public class FileUploadServlet extends HttpServlet {
 
 						if (matcher1.find()) {
 
-							Wmrt = 1;
+							Wmrt = prt;
 
 							if (line.contains("[]")) {
 
-								Wcdtp = 2;
+								Wcdtp = cdtp;
 								Ncdtp++;
 
 							} else if (line.contains("(int )")) {
 
-								Wpdtp = 1;
+								Wpdtp = pdtp;
 								Npdtp++;
 
 							} else {
@@ -649,16 +659,16 @@ public class FileUploadServlet extends HttpServlet {
 
 						} else if (matcher2.find() && line.contains("[]")) {
 
-							Wmrt = 2;
+							Wmrt = crt;
 
 							if (line.contains("[]")) {
 
-								Wcdtp = 2;
+								Wcdtp = cdtp;
 								Ncdtp++;
 
 							} else if (line.contains("(int )")) {
 
-								Wpdtp = 1;
+								Wpdtp = pdtp;
 								Npdtp++;
 
 							} else {
@@ -672,16 +682,16 @@ public class FileUploadServlet extends HttpServlet {
 
 						} else if (matcher3.find()) {
 
-							Wmrt = 0;
+							Wmrt = vrt;
 
 							if (line.contains("[]")) {
 
-								Wcdtp = 2;
+								Wcdtp = cdtp;
 								Ncdtp++;
 
 							} else if (line.contains("(int )")) {
 
-								Wpdtp = 1;
+								Wpdtp = pdtp;
 								Npdtp++;
 
 							} else {

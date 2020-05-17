@@ -150,7 +150,31 @@
 					</div>
 
 					<!-- Content Row -->
-					<div class="row"></div>
+					<div class="row" style = "margin: auto;">
+					
+					<button type="button" id="formButton" style="display: block; width:100%;">Edit Weights</button>
+							
+						<form action="FileUploadServlet" method="post" id="form1" style="padding: 15px; border: 1px solid #666; display: none; margin-right: 37%; margin-left: 37%; margin-top: 1%;">
+							<b>Method with a primitive return type:</b> <input type="text" name="prt" value="1">
+							<br>
+							<br> 
+							<b>Method with a composite return type: </b><input type="text" name="crt" value="2">
+							<br>
+							<br>
+							<b>PMethod with a void return type: </b><input type="text" name="vrt" value="0">
+							<br>
+							<br>
+							<b>Primitive data type parameter: </b><input type="text" name="pdtp" value="1">
+							<br>
+							<br>
+							<b>Composite data type parameter: </b><input type="text" name="cdtp" value="2">
+							<br>
+							<br>
+							<br>
+							<input type="submit" id="submit" name = "methRecal" value="Recalculate" class="btn btn-lg btn-primary">
+						</form>
+					
+					</div>
 					<!-- /.container-fluid -->
 
 					<div class="box"
@@ -225,6 +249,13 @@
 		jQuery(function($) {
 			$("#files").shieldUpload();
 		});
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		  $("#formButton").click(function() {
+		    $("#form1").toggle();
+		  });
+		})
 	</script>
 </body>
 
