@@ -161,7 +161,7 @@
 							<b>Method with a composite return type: </b><input type="text" name="crt" value="2">
 							<br>
 							<br>
-							<b>PMethod with a void return type: </b><input type="text" name="vrt" value="0">
+							<b>Method with a void return type: </b><input type="text" name="vrt" value="0">
 							<br>
 							<br>
 							<b>Primitive data type parameter: </b><input type="text" name="pdtp" value="1">
